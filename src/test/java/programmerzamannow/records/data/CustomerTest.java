@@ -2,6 +2,8 @@ package programmerzamannow.records.data;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.RecordComponent;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerTest {
@@ -58,5 +60,18 @@ class CustomerTest {
     assertTrue(customer1.equals(customer2));
     assertEquals(customer1.hashCode(), customer2.hashCode());
     assertEquals(customer1.toString(), customer2.toString());
+  }
+
+  @Test
+  void reflection() {
+    assertTrue(Customer.class.isRecord());
+
+    RecordComponent[] components = Customer.class.getRecordComponents();
+    assertEquals(4, components.length);
+
+    for (RecordComponent component : components){
+      System.out.println(component.getName());
+      System.out.println(component.getType());
+    }
   }
 }
